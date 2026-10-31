@@ -1,0 +1,16 @@
+[Unit]
+Description=Fleur Flower Mall
+After=network.target mysql.service
+[Service]
+Type=simple
+User=flower
+WorkingDirectory=/opt/flower-mall/backend
+Environment=SPRING_PROFILES_ACTIVE=mysql
+Environment=TZ=Asia/Shanghai
+EnvironmentFile=/etc/flower-mall.env
+ExecStart=/usr/bin/java -Xms256m -Xmx768m -jar /opt/flower-mall/backend/target/flower-mall-1.0.0.jar
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+<script setup>
+import {ref,watch} from 'vue'
+import {api,notify,run} from '../lib'
+const props=defineProps({modelValue:Boolean,address:Object}),emit=defineEmits(['update:modelValue','saved']),form=ref({}),busy=ref(false)
+watch(()=>props.modelValue,v=>{if(v)form.value={receiver:'',phone:'',province:'',city:'',district:'',detail:'',is_default:0,...props.address}})
+async function save(){if(busy.value)return;busy.value=true;try{await api[form.value.id?'put':'post'](form.value.id?'/address/update':'/address/add',form.value);notify('地址已保存');emit('saved');emit('update:modelValue',false)}finally{busy.value=false}}
+</script>
+<template><el-dialog :model-value="modelValue" @close="emit('update:modelValue',false)" :title="address?.id?'编辑收货地址':'添加收货地址'" width="540px" align-center><form @submit.prevent="run(save)" class="stack-form"><div class="form-two"><label>收花人<input v-model="form.receiver" required maxlength="50"/></label><label>手机号码<input v-model="form.phone" required pattern="1[3-9][0-9]{9}" maxlength="11"/></label></div><div class="form-three"><label>省份<input v-model="form.province" required maxlength="50" placeholder="浙江省"/></label><label>城市<input v-model="form.city" required maxlength="50" placeholder="杭州市"/></label><label>区县<input v-model="form.district" required maxlength="50" placeholder="西湖区"/></label></div><label>详细地址<textarea v-model="form.detail" required maxlength="200" rows="3" placeholder="街道、门牌号等"/></label><label class="checkbox-label"><input type="checkbox" :true-value="1" :false-value="0" v-model="form.is_default"/> 设为默认收货地址</label><button class="btn primary" :disabled="busy">保存地址</button></form></el-dialog></template>

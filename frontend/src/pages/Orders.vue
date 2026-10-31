@@ -1,0 +1,10 @@
+<script setup>
+import {ref,onMounted} from 'vue'
+import {useRoute} from 'vue-router'
+import {api,run,statuses,yuan,date} from '../lib'
+import OrderPanel from '../components/OrderPanel.vue'
+const route=useRoute(),data=ref({items:[],total:0}),page=ref(1),status=ref(-1),q=ref(''),selected=ref(null)
+async function load(){data.value=await api.get('/order/list',{params:{q:q.value,status:status.value,page:page.value}})}
+onMounted(()=>run(async()=>{await load();if(route.query.id)selected.value=Number(route.query.id)}))
+</script>
+<template><section class="page-intro wrap"><span class="eyebrow">YOUR FLOWER JOURNEY</span><h1>每一份心意，都有迹可循。</h1><p>从下单到花开，记录每一个温柔瞬间。未支付订单30分钟后自动释放库存。</p></section><section class="wrap section"><div class="shop-toolbar"><select v-model="status" @change="page=1;run(load)"><option :value="-1">全部状态</option><option v-for="(s,i) in statuses" :key="i" :value="i">{{s}}</option></select><form class="search-field" @submit.prevent="page=1;run(load)"><Icon name="search" :size="18"/><input v-model="q" placeholder="搜索订单编号"/><button class="text-button">查询</button></form></div><article class="order-card" v-for="o in data.items" :key="o.id"><div class="row-between"><span class="subtle">{{date(o.create_time)}} <span class="order-no">{{o.order_no}}</span></span><span class="status-tag" :class="'status-'+o.status">{{statuses[o.status]}}</span></div><div class="row-between"><div><h3>一份等待绽放的心意</h3><p class="subtle">{{o.greeting||'鲜花替你表达每一份在意。'}}</p></div><div class="order-card-amount"><b>¥ {{yuan(o.total)}}</b><button class="btn small" @click="selected=o.id">{{o.status===0?'查看并支付':'查看订单'}} <Icon name="arrow" :size="15"/></button></div></div></article><div class="empty" v-if="!data.total"><Icon name="box" :size="45"/><h3>还没有找到订单</h3><RouterLink to="/shop" class="text-link">去挑选一束心意 <Icon name="arrow" :size="17"/></RouterLink></div><Pager :page="page" :total="data.total" @change="v=>{page=v;run(load)}"/></section><el-dialog :model-value="!!selected" @close="selected=null" title="订单详情" width="760px" align-center destroy-on-close><OrderPanel v-if="selected" :id="selected" @changed="run(load)"/></el-dialog></template>

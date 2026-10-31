@@ -1,0 +1,2 @@
+<script setup>defineProps({page:Number,total:Number,size:{default:10}});defineEmits(['change'])</script>
+<template><div v-if="total>size" class="pager"><button class="btn small" :disabled="page<=1" @click="$emit('change',page-1)">上一页</button><span>{{page}} / {{Math.ceil(total/size)}} · 共 {{total}} 条</span><button class="btn small" :disabled="page*size>=total" @click="$emit('change',page+1)">下一页</button></div></template>

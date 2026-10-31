@@ -1,0 +1,27 @@
+-- 在schema.sql和init-base.sql之后导入；仅用于没有商品的演示库。
+SET NAMES utf8mb4;
+INSERT INTO product (id,category_id,name,price,description,specification,cover,stock,warning_stock,status) VALUES (1,1,'偏爱予你 · 玫瑰花束',239,'把说不出口的心意，交给每一朵盛放的玫瑰。柔雾包装，温柔而热烈。 图片为本地插画示意，实际销售前请更换为商品实拍图片。','19枝玫瑰 / 奶油色包装','/images/bouquet-1.svg',36,10,1);
+INSERT INTO product_image (product_id,image_url,image_type,sort) VALUES (1,'/images/bouquet-1.svg','cover',0);
+INSERT INTO stock_record (product_id,change_type,change_quantity,before_stock,after_stock,remark,operator_id) VALUES (1,'入库',36,0,36,'手工导入演示商品',0);
+INSERT INTO product (id,category_id,name,price,description,specification,cover,stock,warning_stock,status) VALUES (2,4,'晴日来信 · 向日葵花束',169,'向着光的方向生长，把元气与明亮送给心上人。搭配尤加利叶与满天星。 图片为本地插画示意，实际销售前请更换为商品实拍图片。','9枝向日葵 / 自然风包装','/images/bouquet-2.svg',28,10,1);
+INSERT INTO product_image (product_id,image_url,image_type,sort) VALUES (2,'/images/bouquet-2.svg','cover',0);
+INSERT INTO stock_record (product_id,change_type,change_quantity,before_stock,after_stock,remark,operator_id) VALUES (2,'入库',28,0,28,'手工导入演示商品',0);
+INSERT INTO product (id,category_id,name,price,description,specification,cover,stock,warning_stock,status) VALUES (3,6,'春日序曲 · 郁金香花束',219,'像把一整个春天抱在怀里。轻盈的郁金香，适合所有值得庆祝的日常。 图片为本地插画示意，实际销售前请更换为商品实拍图片。','15枝郁金香 / 韩式包装','/images/bouquet-3.svg',8,10,1);
+INSERT INTO product_image (product_id,image_url,image_type,sort) VALUES (3,'/images/bouquet-3.svg','cover',0);
+INSERT INTO stock_record (product_id,change_type,change_quantity,before_stock,after_stock,remark,operator_id) VALUES (3,'入库',8,0,8,'手工导入演示商品',0);
+INSERT INTO product (id,category_id,name,price,description,specification,cover,stock,warning_stock,status) VALUES (4,3,'温柔有光 · 康乃馨花束',199,'为最温暖的人，送上细水长流的爱意。柔粉康乃馨，素雅而有层次。 图片为本地插画示意，实际销售前请更换为商品实拍图片。','19枝康乃馨 / 柔粉包装','/images/bouquet-4.svg',24,10,1);
+INSERT INTO product_image (product_id,image_url,image_type,sort) VALUES (4,'/images/bouquet-4.svg','cover',0);
+INSERT INTO stock_record (product_id,change_type,change_quantity,before_stock,after_stock,remark,operator_id) VALUES (4,'入库',24,0,24,'手工导入演示商品',0);
+INSERT INTO product (id,category_id,name,price,description,specification,cover,stock,warning_stock,status) VALUES (5,2,'白日梦境 · 百合花束',259,'纯净白百合搭配绿叶，清新舒展。适合生日、感谢与家居日常。 图片为本地插画示意，实际销售前请更换为商品实拍图片。','5枝多头百合 / 素色包装','/images/bouquet-5.svg',0,10,1);
+INSERT INTO product_image (product_id,image_url,image_type,sort) VALUES (5,'/images/bouquet-5.svg','cover',0);
+INSERT INTO stock_record (product_id,change_type,change_quantity,before_stock,after_stock,remark,operator_id) VALUES (5,'入库',0,0,0,'手工导入演示商品',0);
+INSERT INTO product (id,category_id,name,price,description,specification,cover,stock,warning_stock,status) VALUES (6,1,'紫色诗篇 · 混合花束',289,'紫色的浪漫与自然绿意，写成一首不落俗套的小诗。 图片为本地插画示意，实际销售前请更换为商品实拍图片。','混合花材 / 紫色系包装','/images/bouquet-6.svg',18,10,1);
+INSERT INTO product_image (product_id,image_url,image_type,sort) VALUES (6,'/images/bouquet-6.svg','cover',0);
+INSERT INTO stock_record (product_id,change_type,change_quantity,before_stock,after_stock,remark,operator_id) VALUES (6,'入库',18,0,18,'手工导入演示商品',0);
+INSERT INTO product_flower_language (product_id,flower_id) VALUES (1,1);
+INSERT INTO product_flower_language (product_id,flower_id) VALUES (3,2);
+INSERT INTO product_flower_language (product_id,flower_id) VALUES (5,3);
+INSERT INTO product_flower_language (product_id,flower_id) VALUES (4,4);
+INSERT INTO product_flower_language (product_id,flower_id) VALUES (2,5);
+INSERT INTO product_flower_language (product_id,flower_id) VALUES (1,6);
+INSERT INTO product_flower_language (product_id,flower_id) VALUES (6,7);

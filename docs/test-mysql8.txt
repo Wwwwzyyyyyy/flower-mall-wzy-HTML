@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: cn.flower.mall.BusinessFlowTest
+-------------------------------------------------------------------------------
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.85 s -- in cn.flower.mall.BusinessFlowTest
