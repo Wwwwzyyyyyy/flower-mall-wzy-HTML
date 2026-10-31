@@ -1,15 +1,49 @@
 # 花礼 FLEUR · AI智能花礼商城
 
-根据用户提供的《软件需求规格说明书 V1.2》实现。用户端与商家端均为中文，适配电脑和手机；页面字体、图标、演示花束插画与前端依赖全部本地提供，运行时没有海外CDN依赖。
+一个基于 Vue 3 与 Spring Boot 的鲜花商城项目，包含用户购物端和商家管理后台，支持鲜花选购、祝福语生成、订单履约、库存管理及经营统计。用户端与商家端均为中文，适配电脑和手机。
 
-## 直接体验（Windows）
+**技术栈：** Vue 3 · Vite · Pinia · Element Plus · Java 17 · Spring Boot · MyBatis · MySQL 8 / H2
 
-1. 安装或使用现有 Java 17 及以上版本。
-2. 双击项目根目录的 `start-local.cmd`，等待看到 `Started FlowerApplication`。
-3. 浏览器打开 **http://127.0.0.1:8080/**。
-4. 商家端为 **http://127.0.0.1:8080/#/admin**。
+页面字体、图标和演示花束插画由项目本地提供，运行时没有海外 CDN 依赖。祝福语默认使用本地模板，可配置外部 AI 服务；支付与退款使用模拟流程。
 
-压缩包包含已构建的后端JAR和前端dist，不需要先安装Node.js、Maven或MySQL即可体验。
+## 页面预览
+
+以下为项目本地运行截图，页面中的订单与经营数据为演示数据。
+
+### 商城首页
+
+展示花束轮播、送花场景和商城入口。
+
+![商城首页：花束轮播与送花场景](docs/screenshots/01-home.png)
+
+### 订单详情
+
+展示订单状态进度、商品明细、收花信息、花卡祝福语与模拟支付结果。
+
+![订单详情：履约进度、花卡祝福与支付信息](docs/screenshots/02-order.png)
+
+### 商家工作台
+
+展示经营概览、销售趋势、待处理订单与库存预警，并提供商品、订单、退款等管理入口。
+
+![商家工作台：经营统计与业务管理入口](docs/screenshots/03-dashboard.png)
+
+### 手机端适配
+
+首页在手机宽度下的导航、花束轮播和场景入口。
+
+<img src="docs/screenshots/04-mobile.png" alt="手机端首页：响应式导航与场景入口" width="320">
+
+## 本地运行（Windows）
+
+从 GitHub 获取源码后，先构建，再启动：
+
+1. 准备 Java 17+、Node.js 20.19+（或 22.12+）和 Maven 3.9+，确认命令已加入 PATH。
+2. 双击项目根目录的 `build.cmd`，等待前后端构建完成。
+3. 双击 `start-local.cmd`，等待看到 `Started FlowerApplication`。
+4. 用户端打开 **http://127.0.0.1:8080/**，商家端打开 **http://127.0.0.1:8080/#/admin**。
+
+`backend/target/` 不纳入版本管理，因此从 GitHub 下载的源码首次启动前需要构建。原始项目压缩包包含后端 JAR 和前端 dist，使用该压缩包时可直接运行 `start-local.cmd`；本地演示默认使用 H2，无需先安装 MySQL。
 
 | 角色 | 本地演示账号 | 密码 |
 |---|---|---|
@@ -67,7 +101,7 @@ npm.cmd run dev
 
 ```text
 frontend/       Vue源码、package-lock、dist生产构建、本地SVG插画
-backend/        Java源码、配置、自动化测试、target可执行JAR
+backend/        Java源码、配置、自动化测试；构建后在target生成可执行JAR
 database/       MySQL建库、建表、基础/演示初始化、索引脚本
 deploy/         Nginx、systemd服务及环境变量示例
 docs/           API、部署、使用、业务规则、测试结果、页面截图、原始需求
